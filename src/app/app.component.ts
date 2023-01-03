@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-component-service';
+  newMessage = "";
+
+  onLoaded(img: String){
+    console.log("parent log")
+    console.log(img);
+  }
 }
