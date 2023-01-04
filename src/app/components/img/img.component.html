@@ -3,8 +3,8 @@
   <p>URL example: https://www.w3schools.com/howto/img_avatar.png</p>
   <img [src]="value" width="200px" (load)="imgLoaded()" (error)="imgError()" *ngIf="value; else imageNotFound">
   <ng-template #imageNotFound>
-    <img width="200px" src="/assets/image/no_image.png" alt="">
+    <img width="200px" [src]="imgDefault" alt="">
   </ng-template>
-
+  <h4>{{counter.toLocaleTimeString()}}</h4>
 </div>
 

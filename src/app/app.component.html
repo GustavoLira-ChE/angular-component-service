@@ -1,5 +1,8 @@
 <h1>{{title}}</h1>
 
 <input type="text" [(ngModel)]="newMessage">
+<button (click)="toggleImg()">Toggle</button>
+<p>{{showImg}}</p>
 
-<app-img (loaded)="onLoaded($event)" [value]="newMessage"></app-img>
+
+<app-img *ngIf="showImg" (loaded)="onLoaded($event)" [value]="newMessage" [myString]="'raul'"></app-img>
