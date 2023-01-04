@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-img',
@@ -7,11 +7,24 @@ import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, On
 })
 export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy{
 
-  imgDefault = "";
+  imgDefault = "/assets/image/no_image.png";
+  counter = new Date();
+  counterFunctionClean: number | undefined;
+
+  value: string = "";
   //@Input() is used to pass values from parent to child components
-  @Input() value: string = "";
+  @Input("value")
+  set changeValue(newValue: string){
+    this.value = newValue;
+    //add more code
+  }
   //@Output and EventEmitter are used to pass values from child to parent components
   @Output() loaded = new EventEmitter<string>();
+
+  //Input test
+  @Input() myString: string = "";
+
+
 
   //Component lifecycle
   //Constructor
@@ -21,17 +34,23 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     //Run one time
     console.log("constructor", "img url value: " + this.value);
   }
-  ngOnChanges():void {
+  ngOnChanges(changes: SimpleChanges):void {
     //before render and during
     // changes inputs
     //Run many times
     console.log("ngOnChanges" , "img url value: " + this.value);
+    console.log(changes);
   }
   ngOnInit(): void {
     //before render
     // Can run async calls
     //Run one time
     console.log("ngOnInit" , "img url value: " + this.value);
+
+    this.counterFunctionClean =  window.setInterval(() => {
+      this.counter = new Date();
+      //console.log(this.counter.toLocaleTimeString());
+    }, 1000);
   }
   ngAfterViewInit(): void {
     //before render
@@ -41,6 +60,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   ngOnDestroy(): void {
     //delete
     console.log("ngOnDestroy");
+    window.clearInterval(this.counterFunctionClean);
   }
 
 

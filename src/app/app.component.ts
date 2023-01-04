@@ -8,9 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-component-service';
   newMessage = "";
+  showImg = true;
 
   onLoaded(img: String){
     console.log("parent log")
     console.log(img);
+  }
+  toggleImg() {
+    this.showImg = !this.showImg;
   }
 }
